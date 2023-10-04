@@ -1,8 +1,9 @@
+import Header from "./Shared/Header/Header";
 
 const Career = () => {
     return (
         <div>
-            <p>This is Career</p>
+            <Header></Header>
         </div>
     );
 };

@@ -1,8 +1,9 @@
+import Header from "./Shared/Header/Header";
 
 const About = () => {
     return (
         <div>
-            <p>This is About</p>
+            <Header></Header>
         </div>
     );
 };

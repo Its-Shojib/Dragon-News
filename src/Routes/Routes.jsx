@@ -3,7 +3,9 @@ import Root from "../Layout/Roots/Root";
 import Home from "../Pages/Home";
 import About from "../Pages/About";
 import Career from "../Pages/Career";
-import Login from "../Pages/Login";
+import Login from "../Pages/Login/Login";
+import NewsDetails from "../Pages/NewsDetails/NewsDetails";
+
 
 const router = createBrowserRouter([
     {
@@ -12,7 +14,12 @@ const router = createBrowserRouter([
         children:[
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: ()=> fetch('/news.json')
+            },
+            {
+                path: '/news/:id',
+                element: <NewsDetails></NewsDetails>
             },
             {
                 path: '/about',
