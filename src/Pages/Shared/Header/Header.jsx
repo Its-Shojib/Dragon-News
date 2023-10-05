@@ -1,7 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import profile from './../../../assets/user.png'
+import { useContext } from "react";
+import { AuthContext } from './../../../Layout/AuthProvider/AuthProvider';
 
 const Header = () => {
+    let { user, Logout } = useContext(AuthContext);
+
+    let logoutUser = () => {
+        Logout()
+            .then(res => {
+                console.log(res.user);
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    }
     let NavLinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/about'>About</NavLink></li>
@@ -31,7 +44,12 @@ const Header = () => {
                             <img src={profile} />
                         </div>
                     </label>
-                    <Link to='/login'><button className="bg-green-500 text-white px-3 py-2 rounded-lg">Login</button></Link>
+                    {
+                        user ? <button onClick={logoutUser} className="bg-red-500 text-white px-3 py-2 rounded-lg">Logout</button>
+                            :
+                            <Link to='/login'><button className="bg-green-500 text-white px-3 py-2 rounded-lg">Login</button></Link>
+                    }
+
                 </div>
             </div>
 

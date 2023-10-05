@@ -2,22 +2,41 @@
 import { RiLockPasswordFill } from 'react-icons/ri';
 import Header from '../Shared/Header/Header';
 import { AiOutlineMail } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './../../Layout/AuthProvider/AuthProvider';
 
 
 const Login = () => {
 
+    let { login } = useContext(AuthContext);
+
     let handleLogin = (e) => {
         e.preventDefault();
-        let email = e.target.email.value;
-        let password = e.target.password.value;
+
+        let form = new FormData(e.currentTarget)
+        // let email = e.target.email.value;
+        // let password = e.target.password.value;
+        let email = form.get('email');
+        let password = form.get('password');
         console.log(email, password);
+
+        login(email, password)
+            .then(res => {
+                console.log(res.user);
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+
     }
 
 
     return (
         <div>
             <Header></Header>
-            <div className='w-1/2 mx-auto'>
+            <div className='w-1/3 mx-auto mt-20'>
+                <p className="text-center text-3xl font-bold my-10">Login Now</p>
                 <form onSubmit={handleLogin}>
                     <div className="relative">
                         <p className="text-left text-lg font-semibold">User Email</p>
@@ -43,6 +62,7 @@ const Login = () => {
                         className="bg-gradient-to-r from-violet-500 to-fuchsia-500 w-full py-2 text-white font-semibold text-lg rounded-xl" type="submit">
                         Login</button>
                 </form>
+                <p className="my-5">New to this Site? <Link className='text-blue-500 font-semibold' to='/register'>Register now</Link></p>
             </div>
 
         </div>
