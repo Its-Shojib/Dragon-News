@@ -2,7 +2,7 @@
 import { RiLockPasswordFill } from 'react-icons/ri';
 import Header from '../Shared/Header/Header';
 import { AiOutlineMail } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from './../../Layout/AuthProvider/AuthProvider';
 
@@ -10,6 +10,8 @@ import { AuthContext } from './../../Layout/AuthProvider/AuthProvider';
 const Login = () => {
 
     let { login } = useContext(AuthContext);
+    let location = useLocation();
+    let navigate = useNavigate();
 
     let handleLogin = (e) => {
         e.preventDefault();
@@ -24,6 +26,7 @@ const Login = () => {
         login(email, password)
             .then(res => {
                 console.log(res.user);
+                navigate(location.state ? location.state : '/');
             })
             .catch(err => {
                 console.log(err.message);

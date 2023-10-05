@@ -8,12 +8,8 @@ const Header = () => {
 
     let logoutUser = () => {
         Logout()
-            .then(res => {
-                console.log(res.user);
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
+            .then()
+            .catch()
     }
     let NavLinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
